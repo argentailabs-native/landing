@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Argent AI Labs — BMI Calculator</title>
+  <meta name="description" content="Fast, accessible BMI calculator with a clean landing layout." />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <span class="dot"></span>
+        Argent AI Labs
+      </a>
+      <nav class="nav">
+        <a href="#calculator">Calculator</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero container" id="home">
+      <div class="hero-copy">
+        <h1 class="h1">BMI Calculator</h1>
+        <p class="lead">
+          Quickly estimate your Body Mass Index using <strong>metric</strong> or <strong>imperial</strong> units.
+          No sign-up. No tracking. Just numbers.
+        </p>
+        <a class="btn primary" href="#calculator">Start calculating</a>
+      </div>
+
+      <div class="hero-card" aria-hidden="true">
+        <div class="card">
+          <div class="card-head">Preview</div>
+          <div class="preview">
+            <div class="preview-ring"></div>
+            <div class="preview-gauge"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator -->
+    <section class="container card section" id="calculator" aria-label="BMI Calculator">
+      <div class="card-head">
+        <h2>Calculate your BMI</h2>
+      </div>
+
+      <form id="bmi-form" novalidate>
+        <!-- Unit toggle -->
+        <fieldset class="row row-gap">
+          <legend class="legend">Units</legend>
+          <label class="chip">
+            <input type="radio" name="units" value="metric" checked />
+            <span>Metric (kg, cm)</span>
+          </label>
+          <label class="chip">
+            <input type="radio" name="units" value="imperial" />
+            <span>Imperial (lb, ft+in)</span>
+          </label>
+        </fieldset>
+
+        <!-- Metric group -->
+        <div id="metric-fields" class="grid two">
+          <label class="field">
+            <span class="label">Height (cm)</span>
+            <input id="cm" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g., 170" />
+          </label>
+
+          <label class="field">
+            <span class="label">Weight (kg)</span>
+            <input id="kg" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g., 65.5" />
+          </label>
+        </div>
+
+        <!-- Imperial group -->
+        <div id="imperial-fields" class="grid three hidden">
+          <label class="field">
+            <span class="label">Height (ft)</span>
+            <input id="ft" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g., 5" />
+          </label>
+
+          <label class="field">
+            <span class="label">Height (in)</span>
+            <input id="inch" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g., 8" />
+          </label>
+
+          <label class="field">
+            <span class="label">Weight (lb)</span>
+            <input id="lb" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g., 145" />
+          </label>
+        </div>
+
+        <div class="row row-gap">
+          <button type="button" class="btn" id="clear-btn">Clear</button>
+          <button type="submit" class="btn primary">Compute BMI</button>
+        </div>
+      </form>
+
+      <hr class="rule" />
+
+      <!-- Results -->
+      <div class="results" aria-live="polite" aria-atomic="true">
+        <div class="result-item">
+          <span class="result-label">BMI</span>
+          <div class="result-value" id="bmi-value">—</div>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Category</span>
+          <div class="result-badge" id="bmi-category">—</div>
+        </div>
+      </div>
+      <p class="muted small">
+        * BMI is a screening measure and doesn’t diagnose health. Consult a professional for a full assessment.
+      </p>
+    </section>
+
+    <!-- About -->
+    <section class="container section" id="about">
+      <h2 class="h2">About BMI</h2>
+      <p class="muted">
+        Body Mass Index (BMI) is calculated as weight divided by height squared. This tool supports both
+        metric and imperial inputs and gives you an instant estimate with category interpretation.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="muted small">© <span id="year"></span> Argent AI Labs</span>
+      <a class="muted small" href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
