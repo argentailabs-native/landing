@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apps — Argent AI Labs</title>
+  <meta name="description" content="Explore Argent AI apps." />
+  <link rel="icon" href="/assets/logo-argent-ai.png" type="image/png" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img class="logo" src="/assets/logo-argent-ai.png" alt="Argent AI" />
+        <span>Argent AI Labs</span>
+      </a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/apps/">Apps</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container section">
+    <h1 class="h1">Apps</h1>
+    <p class="lead">Small, focused products that do one thing well.</p>
+
+    <div class="grid two">
+      <a class="app-card card section" href="/apps/bmi/">
+        <div class="badge">Live</div>
+        <h3>BMI Calculator</h3>
+        <p class="muted small">Switch units, enter your info, and see results instantly.</p>
+        <p class="small" style="margin-top:8px"><span class="btn">Open</span></p>
+      </a>
+
+      <div class="app-card card section">
+        <div class="badge muted">Coming soon</div>
+        <h3>Fitness Planner</h3>
+        <p class="muted small">Weekly planning for workouts, goals, and recovery.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner small muted">
+      <span>© <span id="year"></span> Argent AI Labs</span>
+      <span>More apps</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
