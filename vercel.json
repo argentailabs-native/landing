@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/bmi",  "destination": "/apps/bmi", "permanent": true },
+    { "source": "/bmi/", "destination": "/apps/bmi", "permanent": true }
+  ]
+}
