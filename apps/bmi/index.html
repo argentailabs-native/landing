@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BMI Calculator — Argent AI Labs</title>
+  <meta name="description" content="Clean, fast BMI calculator with metric/imperial units." />
+  <link rel="icon" href="/assets/logo-argent-ai.png" type="image/png" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img class="logo" src="/assets/logo-argent-ai.png" alt="Argent AI" />
+        <span>Argent AI Labs</span>
+      </a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/apps/">Apps</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container hero">
+    <div class="hero-copy">
+      <h1 class="h1">BMI Calculator</h1>
+      <p class="lead">Switch units, enter your info, and see results instantly.</p>
+
+      <div class="row row-gap">
+        <label class="chip"><input type="radio" name="units" value="metric" checked /> Metric (cm / kg)</label>
+        <label class="chip"><input type="radio" name="units" value="imperial" /> Imperial (ft/in / lb)</label>
+      </div>
+
+      <div id="metric-fields" class="grid two row-gap">
+        <div class="field">
+          <label class="label" for="cm">Height (cm)</label>
+          <input id="cm" type="number" min="0" placeholder="e.g. 175" />
+        </div>
+        <div class="field">
+          <label class="label" for="kg">Weight (kg)</label>
+          <input id="kg" type="number" min="0" placeholder="e.g. 72" />
+        </div>
+      </div>
+
+      <div id="imperial-fields" class="grid three row-gap hidden">
+        <div class="field">
+          <label class="label" for="ft">Height (ft)</label>
+          <input id="ft" type="number" min="0" placeholder="e.g. 5" />
+        </div>
+        <div class="field">
+          <label class="label" for="inch">Height (in)</label>
+          <input id="inch" type="number" min="0" placeholder="e.g. 9" />
+        </div>
+        <div class="field">
+          <label class="label" for="lb">Weight (lb)</label>
+          <input id="lb" type="number" min="0" placeholder="e.g. 158" />
+        </div>
+      </div>
+
+      <div class="row row-gap">
+        <button id="calc" class="btn primary">Calculate BMI</button>
+        <button id="clear" class="btn">Clear</button>
+      </div>
+
+      <div class="results">
+        <div class="result-item">
+          <div class="result-label">BMI</div>
+          <div id="bmiOut" class="result-value">—</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Status</div>
+          <div id="statusOut" class="result-badge">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="card" style="width:520px;max-width:100%">
+        <div class="card-head">Healthy range</div>
+        <div class="preview">
+          <div class="preview-ring"></div>
+          <div id="gauge" class="preview-gauge"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner small muted">
+      <span>© <span id="year"></span> Argent AI Labs</span>
+      <a class="small" href="/apps/">More apps</a>
+    </div>
+  </footer>
+
+  <script>
+    // simple helpers
+    const cm   = ()=> Number(document.getElementById('cm')?.value || 0);
+    const kg   = ()=> Number(document.getElementById('kg')?.value || 0);
+    const ft   = ()=> Number(document.getElementById('ft')?.value || 0);
+    const inch = ()=> Number(document.getElementById('inch')?.value || 0);
+    const lb   = ()=> Number(document.getElementById('lb')?.value || 0);
+
+    function metersFromImperial(f, i){ return ( (f*12)+i ) * 0.0254; }
+    function kgFromLb(p){ return p * 0.45359237; }
+
+    function category(b){
+      if (!b) return "—";
+      if (b < 18.5) return "Underweight";
+      if (b < 25)   return "Normal";
+      if (b < 30)   return "Overweight";
+      return "Obese";
+    }
+
+    function setGauge(bmi){
+      const g = document.getElementById('gauge');
+      const pct = Math.max(0, Math.min(1, (bmi-15)/20)); // map ~15–35 to 0–1
+      g.style.transform = `translateX(${(pct*60 - 30).toFixed(1)}%)`;
+      g.style.opacity = bmi ? 1 : 0.6;
+    }
+
+    // switch units
+    document.querySelectorAll('input[name="units"]').forEach(r => {
+      r.addEventListener('change', () => {
+        const metric = r.value === 'metric';
+        document.getElementById('metric-fields').classList.toggle('hidden', !metric);
+        document.getElementById('imperial-fields').classList.toggle('hidden', metric);
+        document.getElementById('bmiOut').textContent = '—';
+        document.getElementById('statusOut').textContent = '—';
+        setGauge(0);
+      });
+    });
+
+    // calc
+    document.getElementById('calc').addEventListener('click', () => {
+      const units = document.querySelector('input[name="units"]:checked').value;
+      let m = 0, mass = 0;
+      if (units === 'metric'){ m = cm()/100; mass = kg(); }
+      else { m = metersFromImperial(ft(), inch()); mass = kgFromLb(lb()); }
+      const statusOut = document.getElementById('statusOut');
+      const bmiOut = document.getElementById('bmiOut');
+
+      if (m<=0 || mass<=0){ bmiOut.textContent='—'; statusOut.textContent='—'; setGauge(0); return; }
+      const bmi = Math.round((mass/(m*m))*10)/10;
+      bmiOut.textContent = bmi.toFixed(1);
+      statusOut.textContent = category(bmi);
+      setGauge(bmi);
+    });
+
+    document.getElementById('clear').addEventListener('click', () => {
+      ['cm','kg','ft','inch','lb'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value='';
+      });
+      document.getElementById('bmiOut').textContent='—';
+      document.getElementById('statusOut').textContent='—';
+      setGauge(0);
+    });
+
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    setGauge(0);
+  </script>
+</body>
+</html>
