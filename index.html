@@ -1,141 +1,121 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <base href="/" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Argent AI Labs — BMI Calculator</title>
-  <meta name="description" content="Fast, accessible BMI calculator with a clean landing layout." />
-  <link rel="stylesheet" href="./style.css" />
+  <title>Argent AI Labs — Home</title>
+  <meta name="description" content="Argent AI Labs builds simple, beautiful tools for health & productivity." />
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/logo-argent-ai.png" type="image/png" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#">
-        <span class="dot"></span>
-        Argent AI Labs
+      <a class="brand" href="/">
+        <img class="logo" src="/assets/logo-argent-ai.png" alt="Argent AI" />
+        <span>Argent AI Labs</span>
       </a>
       <nav class="nav">
-        <a href="#calculator">Calculator</a>
-        <a href="#about">About</a>
+        <a href="/">Home</a>
+        <a href="/apps/">Apps</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero container" id="home">
-      <div class="hero-copy">
-        <h1 class="h1">BMI Calculator</h1>
-        <p class="lead">
-          Quickly estimate your Body Mass Index using <strong>metric</strong> or <strong>imperial</strong> units.
-          No sign-up. No tracking. Just numbers.
-        </p>
-        <a class="btn primary" href="#calculator">Start calculating</a>
+  <!-- Hero -->
+  <section class="container hero">
+    <div class="hero-copy">
+      <h1 class="h1">Practical AI tools with clean, friendly design</h1>
+      <p class="lead">We build small, focused apps that feel fast, look great, and help you track health and performance—starting with a best-in-class BMI calculator.</p>
+      <div class="row row-gap">
+        <a class="btn primary" href="/apps/bmi/">Try the BMI Calculator</a>
+        <a class="btn" href="/apps/">See all apps</a>
       </div>
+    </div>
 
-      <div class="hero-card" aria-hidden="true">
-        <div class="card">
-          <div class="card-head">Preview</div>
-          <div class="preview">
-            <div class="preview-ring"></div>
-            <div class="preview-gauge"></div>
-          </div>
+    <div class="hero-card">
+      <div class="card" style="width:520px;max-width:100%">
+        <div class="card-head">Live preview</div>
+        <div class="preview">
+          <div class="preview-ring"></div>
+          <div class="preview-gauge"></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Calculator -->
-    <section class="container card section" id="calculator" aria-label="BMI Calculator">
-      <div class="card-head">
-        <h2>Calculate your BMI</h2>
+  <!-- Why use Argent AI -->
+  <section class="container section">
+    <h2 class="h2">Why people use Argent AI apps</h2>
+    <div class="grid four">
+      <div class="card section">
+        <div class="chip"><strong>Fast</strong></div>
+        <h3>Instant results</h3>
+        <p class="muted small">No accounts or friction—open, input, done. Tools feel as quick as native apps.</p>
       </div>
-
-      <form id="bmi-form" novalidate>
-        <!-- Unit toggle -->
-        <fieldset class="row row-gap">
-          <legend class="legend">Units</legend>
-          <label class="chip">
-            <input type="radio" name="units" value="metric" checked />
-            <span>Metric (kg, cm)</span>
-          </label>
-          <label class="chip">
-            <input type="radio" name="units" value="imperial" />
-            <span>Imperial (lb, ft+in)</span>
-          </label>
-        </fieldset>
-
-        <!-- Metric group -->
-        <div id="metric-fields" class="grid two">
-          <label class="field">
-            <span class="label">Height (cm)</span>
-            <input id="cm" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g., 170" />
-          </label>
-
-          <label class="field">
-            <span class="label">Weight (kg)</span>
-            <input id="kg" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g., 65.5" />
-          </label>
-        </div>
-
-        <!-- Imperial group -->
-        <div id="imperial-fields" class="grid three hidden">
-          <label class="field">
-            <span class="label">Height (ft)</span>
-            <input id="ft" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g., 5" />
-          </label>
-
-          <label class="field">
-            <span class="label">Height (in)</span>
-            <input id="inch" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g., 8" />
-          </label>
-
-          <label class="field">
-            <span class="label">Weight (lb)</span>
-            <input id="lb" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g., 145" />
-          </label>
-        </div>
-
-        <div class="row row-gap">
-          <button type="button" class="btn" id="clear-btn">Clear</button>
-          <button type="submit" class="btn primary">Compute BMI</button>
-        </div>
-      </form>
-
-      <hr class="rule" />
-
-      <!-- Results -->
-      <div class="results" aria-live="polite" aria-atomic="true">
-        <div class="result-item">
-          <span class="result-label">BMI</span>
-          <div class="result-value" id="bmi-value">—</div>
-        </div>
-        <div class="result-item">
-          <span class="result-label">Category</span>
-          <div class="result-badge" id="bmi-category">—</div>
-        </div>
+      <div class="card section">
+        <div class="chip"><strong>Clear</strong></div>
+        <h3>Clean, readable UI</h3>
+        <p class="muted small">Calm typography and spacing make data easy to scan and decisions easy to take.</p>
       </div>
-      <p class="muted small">
-        * BMI is a screening measure and doesn’t diagnose health. Consult a professional for a full assessment.
-      </p>
-    </section>
+      <div class="card section">
+        <div class="chip"><strong>Useful</strong></div>
+        <h3>Focused features</h3>
+        <p class="muted small">We build the 20% that delivers 80% of the value—no bloat, just signal.</p>
+      </div>
+      <div class="card section">
+        <div class="chip"><strong>Private</strong></div>
+        <h3>Local-first</h3>
+        <p class="muted small">Wherever possible, your inputs stay on your device. Simple and respectful.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- About -->
-    <section class="container section" id="about">
-      <h2 class="h2">About BMI</h2>
-      <p class="muted">
-        Body Mass Index (BMI) is calculated as weight divided by height squared. This tool supports both
-        metric and imperial inputs and gives you an instant estimate with category interpretation.
-      </p>
-    </section>
-  </main>
+  <!-- How it works -->
+  <section class="container section">
+    <h2 class="h2">How it works</h2>
+    <div class="grid three">
+      <div class="card section">
+        <h3>1. Enter your info</h3>
+        <p class="muted small">Get fast, friendly feedback—no clutter and no fluff.</p>
+      </div>
+      <div class="card section">
+        <h3>2. See results instantly</h3>
+        <p class="muted small">Results update as you type. Clear, color-coded status.</p>
+      </div>
+      <div class="card section">
+        <h3>3. Improve over time</h3>
+        <p class="muted small">Small steps build momentum. Our tools help you keep going.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="container section">
+    <div class="card section">
+      <h2 class="h2">About Argent AI Labs</h2>
+      <p class="muted">We’re a small studio exploring how AI can make everyday wellness tools clearer, faster, and more enjoyable. Simple first, smart second.</p>
+      <div class="row row-gap">
+        <a class="btn primary" href="/apps/bmi/">Try the BMI Calculator</a>
+        <a class="btn" href="/apps/">Browse all apps</a>
+      </div>
+    </div>
+  </section>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <span class="muted small">© <span id="year"></span> Argent AI Labs</span>
-      <a class="muted small" href="#home">Back to top ↑</a>
+    <div class="container footer-inner small muted">
+      <span>© <span id="year"></span> Argent AI Labs</span>
+      <span>Built with care.</span>
     </div>
   </footer>
 
-  <script src="./script.js" defer></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
