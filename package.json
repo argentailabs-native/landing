@@ -3,9 +3,10 @@
   "private": true,
   {
   "scripts": {
-    "build": "tsc && prisma generate",
-    "postbuild": "prisma db push"
-  }
+  "postinstall": "prisma generate",            
+  "build": "tsc && prisma generate",
+  "postbuild": "prisma db push"
+}
 },
   "dependencies": {
     "@prisma/client": "^5.8.0",
