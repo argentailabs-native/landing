@@ -1,14 +1,7 @@
 {
   "version": 2,
   "routes": [
-    // 1) Never rewrite API routes
-    { "src": "^/api/(.*)$", "dest": "/api/$1" },
-
-    // 2) Multi-page static routes (optional, but nice)
-    { "src": "^/apps/bmi/(.*)$", "dest": "/apps/bmi/$1" },
-    { "src": "^/contact/(.*)$", "dest": "/contact/$1" },
-
-    // 3) Root page
-    { "src": "^/$", "dest": "/index.html" }
+    { "src": "^/api/(.*)$", "dest": "/api/$1" },   // let API functions work
+    { "src": "^/$", "dest": "/index.html" }       // serve the homepage at /
   ]
 }
