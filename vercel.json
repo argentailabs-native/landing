@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "^/api/(.*)$", "dest": "/api/$1" },
+    { "src": "^/apps/bmi/(.*)$", "dest": "/apps/bmi/$1" },
+    { "src": "^/contact/(.*)$", "dest": "/contact/$1" },
+    { "src": "^/$", "dest": "/index.html" }
+  ]
+}
