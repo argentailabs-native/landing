@@ -1,7 +1,7 @@
 {
   "version": 2,
   "routes": [
-    { "src": "^/api/(.*)$", "dest": "/api/$1" },   // let API functions work
-    { "src": "^/$", "dest": "/index.html" }       // serve the homepage at /
+    { "src": "^/api/(.*)$", "dest": "/api/$1" },   
+    { "src": "^/$", "dest": "/index.html" }       
   ]
 }
